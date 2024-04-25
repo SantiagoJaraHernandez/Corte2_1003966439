@@ -1,0 +1,44 @@
+@startuml MR
+
+entity "CategoriaCarros" as CategoriaCarros {
+  +idCategoria : INT (PK)
+  --
+  nombreCategoria : VARCHAR(50)
+  descripcion : VARCHAR(255)
+}
+
+entity "Autos" as Autos {
+  +idAuto : INT (PK)
+  --
+  modelo : VARCHAR(50)
+  marca : VARCHAR(50)
+  añoFabricacion : INT
+  color : VARCHAR(50)
+  precio : DECIMAL(10, 2)
+  idCategoria : INT (FK)
+}
+
+entity "Persona" as Persona {
+  +idPersona : INT (PK)
+  --
+  nombre : VARCHAR(50)
+  apellido : VARCHAR(50)
+  direccion : VARCHAR(255)
+  telefono : VARCHAR(15)
+  correoElectronico : VARCHAR(100)
+  fechaNacimiento : DATE
+}
+
+entity "AutosPersona" as AutosPersona {
+  +idAutoPersona : INT (PK)
+  --
+  idAuto : INT (FK)
+  idPersona : INT (FK)
+  fechaCompra : DATE
+}
+
+CategoriaCarros ||--o{ Autos : idCategoria
+Autos ||--o{ AutosPersona : idAuto
+Persona ||--o{ AutosPersona : idPersona
+
+@enduml
